@@ -1,4 +1,7 @@
 
+using ApiFinalProject.persistence;
+using Microsoft.EntityFrameworkCore;
+
 namespace ApiFinalProject
 {
     public class Program
@@ -8,7 +11,10 @@ namespace ApiFinalProject
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
+            options.UseSqlServer(builder.Configuration.GetConnectionString("cs"))
+            ); ;
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -25,7 +31,7 @@ namespace ApiFinalProject
 
             app.UseAuthorization();
 
-            //csndfvndfvbsdmlv
+            
             app.MapControllers();
 
             app.Run();
