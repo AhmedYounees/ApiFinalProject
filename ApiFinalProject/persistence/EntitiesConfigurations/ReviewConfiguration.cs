@@ -8,7 +8,7 @@ public class ReviewConfiguration : IEntityTypeConfiguration<Review>
 {
     public void Configure(EntityTypeBuilder<Review> builder)
     {
-        builder.Property(r => r.Description)
+        builder.Property(r => r.Comment)
             .IsRequired()
             .HasMaxLength(1000);
         builder.HasOne(r => r.Course)

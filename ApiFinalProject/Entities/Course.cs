@@ -6,8 +6,9 @@ public class Course
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public DateTime CreatedOn { get; set; } = DateTime.Now;
+    public string PosterImage {  get; set; } = string.Empty;
     public DateTime? UpdatedOn { get; set; }
-
+    public decimal Price { get; set; }
     //relations
     public Category Category { get; set; } = default!;
     public int CategoryId { get; set; }
