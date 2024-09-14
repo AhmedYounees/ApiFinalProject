@@ -1,4 +1,6 @@
-﻿namespace ApiFinalProject.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ApiFinalProject.Entities;
 
 public class Instructor
 {
@@ -12,5 +14,9 @@ public class Instructor
     public int SpecializationId { get; set; }
     public ICollection<Course> Courses { get; set; } = new List<Course>();
     public ICollection<CourseInstructor> InstructorCourses { get; set; } = new List<CourseInstructor>();
+    [ForeignKey("ApplicationUser")]
+    public string ApplicationUserId { get; set; }
+
+    public ApplicationUser ApplicationUser { get; set; }
 
 }

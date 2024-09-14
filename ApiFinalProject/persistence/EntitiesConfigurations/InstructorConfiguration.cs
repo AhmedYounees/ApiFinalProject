@@ -15,6 +15,13 @@ public class InstructorConfiguration : IEntityTypeConfiguration<Instructor>
             .WithMany(spliz => spliz.Instructors)
             .HasForeignKey(inst => inst.SpecializationId);
 
+        builder
+          .HasOne(s => s.ApplicationUser) // A student has one ApplicationUser
+          .WithOne(u => u.instructor) // ApplicationUser has one Student
+          .HasForeignKey<Instructor>(s => s.ApplicationUserId) // Use ApplicationUserId as foreign key in Student
+          .IsRequired();
+
+
 
     }
 }

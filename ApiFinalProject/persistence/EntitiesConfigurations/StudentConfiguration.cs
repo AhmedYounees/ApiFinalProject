@@ -1,6 +1,7 @@
 ﻿using ApiFinalProject.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace ApiFinalProject.persistence.EntitiesConfigurations;
 
@@ -15,6 +16,11 @@ public class StudentConfiguration : IEntityTypeConfiguration<Student>
         builder.HasMany(std => std.StudentCourses)
                        .WithOne(cs => cs.Student)
                        .HasForeignKey(cs => cs.StudentId);
+        builder
+           .HasOne(s => s.ApplicationUser) // A student has one ApplicationUser
+           .WithOne(u => u.Student) // ApplicationUser has one Student
+           .HasForeignKey<Student>(s => s.ApplicationUserId) // Use ApplicationUserId as foreign key in Student
+           .IsRequired();
     }
 }
 

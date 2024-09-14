@@ -1,11 +1,13 @@
 ﻿using ApiFinalProject.Entities;
 using ApiFinalProject.persistence.EntitiesConfigurations;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace ApiFinalProject.persistence;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<IdentityUser>(options)
 {
     public DbSet<Category> Categories { get; set; } 
     public DbSet<Chapter> Chapters { get; set; } 
