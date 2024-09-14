@@ -1,6 +1,9 @@
-﻿namespace ApiFinalProject.Services.dashbord
+﻿using ApiFinalProject.DTO.DashbordDTO;
+
+namespace ApiFinalProject.Services.dashbord
 {
-    public class IDashbord
+    public interface IDashbord
     {
+        public Task<IEnumerable<TeacherCoursesDTO>> GetAllTeacherWithCourses();
     }
 }

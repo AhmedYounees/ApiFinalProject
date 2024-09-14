@@ -1,5 +1,8 @@
 
+using ApiFinalProject.Entities;
 using ApiFinalProject.persistence;
+using ApiFinalProject.Services.dashbord;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiFinalProject
@@ -15,7 +18,10 @@ namespace ApiFinalProject
 
             options.UseSqlServer(builder.Configuration.GetConnectionString("cs"))
             ); ;
+           builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllers();
+            builder.Services.AddScoped<IDashbord,DashbordService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
