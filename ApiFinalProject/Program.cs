@@ -13,7 +13,22 @@ namespace ApiFinalProject
 {
     public class Program
     {
-        public static void Main(string[] args)
+
+        // Method to ensure roles exist in the database
+      static  async Task EnsureRolesExist(RoleManager<IdentityRole> roleManager)
+        {
+            if (!await roleManager.RoleExistsAsync("Student"))
+            {
+                await roleManager.CreateAsync(new IdentityRole("Student"));
+            }
+            if (!await roleManager.RoleExistsAsync("Teacher"))
+            {
+                await roleManager.CreateAsync(new IdentityRole("Teacher"));
+            }
+        }
+
+
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -45,14 +60,28 @@ namespace ApiFinalProject
                 });
             });
 
-            // ... other configuration ...
+          
 
 
             builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
             builder.Logging.AddConsole();
 
             var app = builder.Build();
-
+            //add two role student and teacher
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    await EnsureRolesExist(roleManager);
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions as needed, such as logging
+                    Console.WriteLine($"Error creating roles: {ex.Message}");
+                }
+            }
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
