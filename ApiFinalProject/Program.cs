@@ -4,6 +4,7 @@ using ApiFinalProject.persistence;
 using ApiFinalProject.Services.Chapter;
 using ApiFinalProject.Services.Course;
 using ApiFinalProject.Services.dashbord;
+using ApiFinalProject.Services.Specalazation;
 using ApiFinalProject.Services.Video;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,7 @@ namespace ApiFinalProject
             builder.Services.AddScoped<IDashbord,DashbordService>();
             builder.Services.AddScoped<IChapterService, ChapterService>();
             builder.Services.AddScoped<ICourseService, CourseService>();
+            builder.Services.AddScoped<ISpecalazation, SpecalazationService>();
             
             builder.Services.AddScoped<IVideoService, VideoService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

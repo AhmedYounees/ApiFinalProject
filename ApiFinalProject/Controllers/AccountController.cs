@@ -54,6 +54,7 @@ namespace ApiFinalProject.Controllers
 
                         var teacher = new Instructor
                         {
+                            ExperienceAge=model.experienceAge,
                             ApplicationUserId = user.Id,
                             Name = model.Name,
                             SpecializationId = model.SpecializationId

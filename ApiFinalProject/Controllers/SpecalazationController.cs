@@ -1,4 +1,5 @@
-﻿using ApiFinalProject.Entities;
+﻿using ApiFinalProject.DTO.Specalization;
+using ApiFinalProject.Entities;
 using ApiFinalProject.Services.Instructors;
 using ApiFinalProject.Services.Specalazation;
 using Microsoft.AspNetCore.Http;
@@ -20,9 +21,11 @@ namespace ApiFinalProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult addSpe(Specialization s1)
+        public IActionResult addSpe(specalizationRequst s1)
         {
-            ispecalazation.add(s1);
+            Specialization specialization=new Specialization();
+            specialization.Name = s1.name;
+            ispecalazation.add(specialization);
             ispecalazation.Save();
             return Created();
         }
