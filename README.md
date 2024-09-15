@@ -3,7 +3,7 @@
 
 
 ## Entities and Relationships:
-==============================================
+
 
 ### Courses
     
@@ -59,7 +59,7 @@
 
 
 ## API Structure
-==============================================
+
 
 ### Authentication
 - **POST** `/api/auth/register` - Register a new user (All)
@@ -167,7 +167,7 @@
 
 
 ## User Stories
-==============================================
+
 
 User Roles
 ----------
