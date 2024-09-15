@@ -1,7 +1,11 @@
 
 using ApiFinalProject.Entities;
 using ApiFinalProject.persistence;
+using ApiFinalProject.Services.Chapter;
+using ApiFinalProject.Services.Course;
 using ApiFinalProject.Services.dashbord;
+using ApiFinalProject.Services.Video;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +26,12 @@ namespace ApiFinalProject
             .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllers();
             builder.Services.AddScoped<IDashbord,DashbordService>();
+            // Add IWebHostEnvironment
+            //builder.Services.AddSingleton<IWebHostEnvironment,IWebHostEnvironment>();
+            builder.Services.AddScoped<IChapterService, ChapterService>();
+            builder.Services.AddScoped<ICourseService, CourseService>();
+          //  builder.Services.AddScoped<IDashbord, DashbordService>();
+            builder.Services.AddScoped<IVideoService, VideoService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -34,7 +44,9 @@ namespace ApiFinalProject
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            // Enable serving of static files (e.g., for videos)
+            app.UseStaticFiles();
+            app.UseRouting();
             app.UseAuthorization();
 
             
