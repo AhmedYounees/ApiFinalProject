@@ -14,7 +14,7 @@
         public int SpecializationId { get; set; } // Reference to the Specialization table
 
         // Student-specific fields
-        public string Grade { get; set; }
+        public string? Grade { get; set; }
     }
 
 }

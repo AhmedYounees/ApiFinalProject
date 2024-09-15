@@ -4,6 +4,7 @@ using ApiFinalProject.persistence;
 using ApiFinalProject.Services.Chapter;
 using ApiFinalProject.Services.Course;
 using ApiFinalProject.Services.dashbord;
+using ApiFinalProject.Services.Video;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,10 +40,24 @@ namespace ApiFinalProject
             .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllers();
             builder.Services.AddScoped<IDashbord,DashbordService>();
+            builder.Services.AddScoped<IChapterService, ChapterService>();
+            builder.Services.AddScoped<ICourseService, CourseService>();
+            
+            builder.Services.AddScoped<IVideoService, VideoService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            //allow cors policy
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
             var app = builder.Build();
             //add two role student and teacher
             using (var scope = app.Services.CreateScope())
@@ -59,6 +74,8 @@ namespace ApiFinalProject
                     Console.WriteLine($"Error creating roles: {ex.Message}");
                 }
             }
+            //builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
+            //builder.Logging.AddConsole();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
