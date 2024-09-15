@@ -2,6 +2,8 @@
 using ApiFinalProject.Entities;
 using ApiFinalProject.persistence;
 using ApiFinalProject.Services.dashbord;
+using ApiFinalProject.Services.Instructors;
+using ApiFinalProject.Services.Specalazation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,10 +24,13 @@ namespace ApiFinalProject
             .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllers();
             builder.Services.AddScoped<IDashbord,DashbordService>();
+            builder.Services.AddScoped<IInstructor, InstructorService>();
+            builder.Services.AddScoped<ISpecalazation, SpecalazationService>();
+            
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddScoped<IInstructor, InstructorService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
