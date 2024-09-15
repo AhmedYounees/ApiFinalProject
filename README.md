@@ -1,5 +1,5 @@
 # Online Learning Platform
-==============================================
+
 
 
 ## Entities and Relationships:
@@ -54,7 +54,7 @@
     *   Attributes: Lesson ID, Lesson Name, Lesson Duration, Img
     *   Relationships:
         *   **Belongs to**: Chapters
-==============================================
+
 
 
 
@@ -163,7 +163,7 @@
 - **GET** `/api/search` - Global search across courses, instructors, and categories (All)
   - Query parameters: `q`, `type`, `page`, `limit`, `sort`, `order`
 
-==============================================
+
 
 
 ## User Stories
