@@ -4,6 +4,7 @@ using ApiFinalProject.persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiFinalProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240915193037_add-filepath-property")]
+    partial class addfilepathproperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -587,7 +590,7 @@ namespace ApiFinalProject.Migrations
             modelBuilder.Entity("ApiFinalProject.Entities.Instructor", b =>
                 {
                     b.HasOne("ApiFinalProject.Entities.ApplicationUser", "ApplicationUser")
-                        .WithOne()
+                        .WithOne("instructor")
                         .HasForeignKey("ApiFinalProject.Entities.Instructor", "ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -625,7 +628,7 @@ namespace ApiFinalProject.Migrations
             modelBuilder.Entity("ApiFinalProject.Entities.Student", b =>
                 {
                     b.HasOne("ApiFinalProject.Entities.ApplicationUser", "ApplicationUser")
-                        .WithOne()
+                        .WithOne("Student")
                         .HasForeignKey("ApiFinalProject.Entities.Student", "ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -733,6 +736,15 @@ namespace ApiFinalProject.Migrations
                     b.Navigation("Reviews");
 
                     b.Navigation("StudentCourses");
+                });
+
+            modelBuilder.Entity("ApiFinalProject.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Student")
+                        .IsRequired();
+
+                    b.Navigation("instructor")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
