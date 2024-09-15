@@ -8,6 +8,8 @@ using ApiFinalProject.Services.Specalazation;
 using ApiFinalProject.Services.Video;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ApiFinalProject
 {
@@ -36,9 +38,13 @@ namespace ApiFinalProject
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
             options.UseSqlServer(builder.Configuration.GetConnectionString("cs"))
-            ); ;
-           builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            );
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+             .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            //builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+
             builder.Services.AddControllers();
             builder.Services.AddScoped<IDashbord,DashbordService>();
             builder.Services.AddScoped<IChapterService, ChapterService>();
@@ -89,6 +95,7 @@ namespace ApiFinalProject
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
+            //app.MapIdentityApi<ApplicationUser>();
 
             
             app.MapControllers();

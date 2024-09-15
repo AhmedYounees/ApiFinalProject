@@ -18,7 +18,7 @@ public class StudentConfiguration : IEntityTypeConfiguration<Student>
                        .HasForeignKey(cs => cs.StudentId);
         builder
            .HasOne(s => s.ApplicationUser) // A student has one ApplicationUser
-           .WithOne(u => u.Student) // ApplicationUser has one Student
+           .WithOne() // ApplicationUser has one Student
            .HasForeignKey<Student>(s => s.ApplicationUserId) // Use ApplicationUserId as foreign key in Student
            .IsRequired();
     }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ApiFinalProject.Migrations
 {
     /// <inheritdoc />
-    public partial class fixmigrationerroraddapplicationUser : Migration
+    public partial class newafteredituser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
