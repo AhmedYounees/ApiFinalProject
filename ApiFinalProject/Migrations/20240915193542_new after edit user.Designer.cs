@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiFinalProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240914072351_fix-migration-error-add-applicationUser")]
-    partial class fixmigrationerroraddapplicationUser
+    [Migration("20240915193542_new after edit user")]
+    partial class newafteredituser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -586,7 +586,7 @@ namespace ApiFinalProject.Migrations
             modelBuilder.Entity("ApiFinalProject.Entities.Instructor", b =>
                 {
                     b.HasOne("ApiFinalProject.Entities.ApplicationUser", "ApplicationUser")
-                        .WithOne("instructor")
+                        .WithOne()
                         .HasForeignKey("ApiFinalProject.Entities.Instructor", "ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -624,7 +624,7 @@ namespace ApiFinalProject.Migrations
             modelBuilder.Entity("ApiFinalProject.Entities.Student", b =>
                 {
                     b.HasOne("ApiFinalProject.Entities.ApplicationUser", "ApplicationUser")
-                        .WithOne("Student")
+                        .WithOne()
                         .HasForeignKey("ApiFinalProject.Entities.Student", "ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -732,15 +732,6 @@ namespace ApiFinalProject.Migrations
                     b.Navigation("Reviews");
 
                     b.Navigation("StudentCourses");
-                });
-
-            modelBuilder.Entity("ApiFinalProject.Entities.ApplicationUser", b =>
-                {
-                    b.Navigation("Student")
-                        .IsRequired();
-
-                    b.Navigation("instructor")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
