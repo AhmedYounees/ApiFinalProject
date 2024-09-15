@@ -35,6 +35,21 @@ namespace ApiFinalProject
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
+
+            // ... other configuration ...
+
+
+            builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
+            builder.Logging.AddConsole();
 
             var app = builder.Build();
 
@@ -44,6 +59,7 @@ namespace ApiFinalProject
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors("AllowAll");
             // Enable serving of static files (e.g., for videos)
             app.UseStaticFiles();
             app.UseRouting();
